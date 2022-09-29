@@ -18,44 +18,34 @@ Dealing with myu investigations in sequence,
 4. Can I use a Network Attached Video Camera instead of a USB WebCam to stream the video for the Object Identification Workflow.
 5. Is it possible to make this Object Identification TensorFlow Model run faster with a connected TPU.
 
+
+
+## Step 0 - Prepare Debian Linux Machine
+
+Enable SSH?
+```
+sudo apt install openssh-server python3-pip -y
+pip3 install tflite_support
+pip3 install opencv-python
+```
+
+
+
 ## Step 1 - Capturing a video stream from a USB webcam.
 
 To run through this use-case I used Python code, and made use of the OpenCV module:
 
-
 Here is the initial code that can be found in this repo [here](./code/step-1/video-capture.py)
 
-```python
-# import opencv2
-import cv2
+## Step 2 - Object Identification on the video stream
 
-# open video capture device id 0
-cap = cv2.VideoCapture(0)
+To expand on the previous example, I included a TensorFlow lite model to analysing each frame, and drawing rectangles on the image identifying each object.
 
-# if video capture device cannot be opened print error and exit
-if not cap.isOpened():
-    print("error - cannot open video capture device")
-    exit()
-
-# Start Loop
-while True:
-    # capture frame from video capture device
-    ret, frame = cap.read()
-    # if frame is read correctly ret is True
-    if not ret:
-        print("error - cannot read frame")
-        break
-
-    # display the frame
-    cv2.imshow('video', frame)
-
-    # wait for ESC to be pressed, and exit loop if pressed
-    if cv2.waitKey(1) == 27:
-        break
-
-# release the video capture device
-cap.release()
-cv2.destroyAllWindows()
+Download the model TensorFlow Lite model:
+```shell
+curl \
+  -L 'https://tfhub.dev/tensorflow/lite-model/efficientdet/lite0/detection/metadata/1?lite-format=tflite' \
+  -o 'efficientdet_lite0.tflite'
 ```
 
-## Step 2 - 
+Here is the initial code that can be found in this repo [here](./code/step-2/video-capture.py)
