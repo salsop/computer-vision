@@ -4,11 +4,10 @@ I recently watched a [Build a restaurant edge solution with Google Cloud](https:
 
 If you're interested in working though this with me, you'll need the following items:
 
-* Raspberry PI v3b+
-* USB WebCam
-* Google Cloud Account
-* Network Enabled Camera with RTSP suport.
+* Debian Linux Machine with Camera (USB or Built-in)
+* Google Cloud Account for the Model Training
 * Coral USB TPU
+* Network Enabled Camera with RTSP suport.
 
 Dealing with myu investigations in sequence,
 
@@ -19,7 +18,6 @@ Dealing with myu investigations in sequence,
 5. Is it possible to make this Object Identification TensorFlow Model run faster with a connected TPU.
 
 
-
 ## Step 0 - Prepare Debian Linux Machine
 
 Enable SSH?
@@ -28,8 +26,6 @@ sudo apt install openssh-server python3-pip -y
 pip3 install tflite_support
 pip3 install opencv-python
 ```
-
-
 
 ## Step 1 - Capturing a video stream from a USB webcam.
 
@@ -49,3 +45,6 @@ curl \
 ```
 
 Here is the initial code that can be found in this repo [here](./code/step-2/video-capture.py)
+
+
+![Coral USB](./images/coral-usb.webp =100x)

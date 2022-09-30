@@ -1,5 +1,4 @@
 # import opencv2
-from random import Random
 import cv2
 
 # import tensorflow lite modules
