@@ -47,4 +47,8 @@ curl \
 Here is the initial code that can be found in this repo [here](./code/step-2/video-capture.py)
 
 
-![Coral USB](./images/coral-usb.webp =100x)
+## Step 4 - Does an Edge TPU help with performance?
+
+I ordered a Coral USB TPU online from Amazon
+
+![Coral USB](./images/coral-usb.webp)
