@@ -4,9 +4,9 @@ import cv2
 from datetime import datetime
 
 # import tensorflow lite modules
-# from tflite_support.task import core
-# from tflite_support.task import processor
-# from tflite_support.task import vision
+from tflite_support.task import core
+from tflite_support.task import processor
+from tflite_support.task import vision
 
 # set variables for the tensorflow lite detection
 model = "efficientdet_lite0.tflite"
@@ -22,10 +22,10 @@ if not cap.isOpened():
     exit()
 
 # initialize the object detection model
-# base_options = core.BaseOptions(file_name=model, use_coral=enable_edgetpu, num_threads=num_threads)
-# detection_options = processor.DetectionOptions(max_results=10, score_threshold=0.3)
-# options = vision.ObjectDetectorOptions(base_options=base_options, detection_options=detection_options)
-# detector = vision.ObjectDetector.create_from_options(options)
+base_options = core.BaseOptions(file_name=model, use_coral=enable_edgetpu, num_threads=num_threads)
+detection_options = processor.DetectionOptions(max_results=10, score_threshold=0.3)
+options = vision.ObjectDetectorOptions(base_options=base_options, detection_options=detection_options)
+detector = vision.ObjectDetector.create_from_options(options)
 
 skipFramesCounter = 0
 
@@ -53,28 +53,28 @@ while True:
         # convert the image from BGR to RGB for the tensorflow lite model
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        # # create a tensorimage object from the RGB image
-        # input_tensor = vision.TensorImage.create_from_array(rgb_frame)
+        # create a tensorimage object from the RGB image
+        input_tensor = vision.TensorImage.create_from_array(rgb_frame)
 
-        # # run object detection using the model
-        # detection_result = detector.detect(input_tensor)
+        # run object detection using the model
+        detection_result = detector.detect(input_tensor)
 
-        # # draw boxes and labels on frame
-        # for detection in detection_result.detections:
+        # draw boxes and labels on frame
+        for detection in detection_result.detections:
 
-        #     # draw bounding_box for detected object
-        #     bbox = detection.bounding_box
-        #     start_point = bbox.origin_x, bbox.origin_y
-        #     end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
-        #     cv2.rectangle(frame, start_point, end_point, _TEXT_COLOR, 3)
+            # draw bounding_box for detected object
+            bbox = detection.bounding_box
+            start_point = bbox.origin_x, bbox.origin_y
+            end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+            cv2.rectangle(frame, start_point, end_point, _TEXT_COLOR, 3)
 
-        #     # draw label and score for detected object
-        #     category = detection.categories[0]
-        #     category_name = category.category_name
-        #     probability = round(category.score, 2)
-        #     result_text = category_name + ' (' + str(probability) + ')'
-        #     text_location = (_MARGIN + bbox.origin_x, _MARGIN + _ROW_SIZE + bbox.origin_y)
-        #     cv2.putText(frame, result_text, text_location, cv2.FONT_HERSHEY_PLAIN, _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
+            # draw label and score for detected object
+            category = detection.categories[0]
+            category_name = category.category_name
+            probability = round(category.score, 2)
+            result_text = category_name + ' (' + str(probability) + ')'
+            text_location = (_MARGIN + bbox.origin_x, _MARGIN + _ROW_SIZE + bbox.origin_y)
+            cv2.putText(frame, result_text, text_location, cv2.FONT_HERSHEY_PLAIN, _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
 
         # display the frame full screen
         cv2.namedWindow("video", cv2.WND_PROP_FULLSCREEN)
