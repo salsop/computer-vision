@@ -71,7 +71,19 @@ You can test this with [VLC Media Player](https://www.videolan.org/) by opening 
 
 Here is the code with now processing the RTSP stream in this repo [here](./code/step-3/video-capture.py)
 
-## Step 4 - Does an Edge TPU help with performance?
+## Step 4 - Training a model to identify something of interest to me (aka a Toy)
+
+First I needed pictures of the Toy. As I wanted to replicate using images that were able to be obtained by monitoring my camera, so I could train it on the same type of images that would be seen by the camera.
+
+I wanted to save a photo when the SPACE key was pressed and save these photos for later learning.
+
+You can see the code changes for this in this repo [here](./code/step-4/video-capture.py)
+
+Once I gathered enough photos now I need to train the model.
+
+
+
+## Step 5 - Does an Edge TPU help with performance?
 
 I ordered a Coral USB TPU online from Amazon
 
