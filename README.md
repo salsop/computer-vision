@@ -73,15 +73,38 @@ Here is the code with now processing the RTSP stream in this repo [here](./code/
 
 ## Step 4 - Training a model to identify something of interest to me (aka a Toy)
 
+### Step 4.1 - Collecting the Images for Training
+
 First I needed pictures of the Toy. As I wanted to replicate using images that were able to be obtained by monitoring my camera, so I could train it on the same type of images that would be seen by the camera.
 
 I wanted to save a photo when the SPACE key was pressed and save these photos for later learning.
 
 You can see the code changes for this in this repo [here](./code/step-4/video-capture.py)
 
+### Step 4.2 - Training the model
+
 Once I gathered enough photos now I need to train the model.
 
+To enable quick training of a new model, I decided to use [Vertex AI](https://cloud.google.com/vertex-ai).
 
+First I created a new [Cloud Storage](https://cloud.google.com/storage) account and copied the files to the new bucket. We also need to create a list of all the files for import with the path to the files in the format `gs://bucketname/filename`
+
+Here is an example of the filew contents:
+```
+gs://salsop-unprocessed/20220928214130.png
+gs://salsop-unprocessed/20220928214150.png
+gs://salsop-unprocessed/20220928214207.png
+gs://salsop-unprocessed/20220928214221.png
+gs://salsop-unprocessed/20220928214234.png
+gs://salsop-unprocessed/20220928214247.png
+gs://salsop-unprocessed/20220928214301.png
+gs://salsop-unprocessed/20220928214315.png
+gs://salsop-unprocessed/20220928214334.png
+gs://salsop-unprocessed/20220928214402.png
+gs://salsop-unprocessed/20220928214430.png
+```
+
+Now we have the files, and a list of the files, we can create a Vertex AI dataset
 
 ## Step 5 - Does an Edge TPU help with performance?
 
